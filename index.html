@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>형사법연구회 제6회 형사모의재판</title>
-    <!-- Google Fonts (고급스러운  serif & 깔끔한 sans-serif 폰트) -->
+    <!-- Google Fonts (고급스러운 serif & 깔끔한 sans-serif 폰트) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Reset 및 테마 색상 정의 */
@@ -33,6 +33,9 @@
             overflow-x: hidden;
             line-height: 1.6;
             scroll-behavior: smooth;
+            /* 한글 단어 단위 줄바꿈 적용 (글자 중간에 잘리지 않음) */
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
         /* ---------------------------------- */
@@ -140,10 +143,10 @@
             font-size: 2.3rem;
             font-weight: 700;
             margin-bottom: 35px;
-            word-break: keep-all;
             letter-spacing: -0.5px;
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            word-break: keep-all;
         }
 
         .enter-btn {
@@ -159,6 +162,7 @@
             pointer-events: auto;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            white-space: nowrap;
         }
 
         .enter-btn:hover {
@@ -177,26 +181,27 @@
             left: 0;
             width: 100%;
             height: var(--header-height);
-            background: rgba(13, 14, 18, 0.9);
+            background: rgba(13, 14, 18, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 6%;
+            padding: 0 5%;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             color: var(--text-main);
+            flex-shrink: 0;
         }
 
         .nav-logo img {
-            height: 34px;
+            height: 32px;
             border-radius: 4px;
             background: #fff;
             padding: 2px;
@@ -207,12 +212,13 @@
             font-weight: 700;
             font-size: 1.05rem;
             letter-spacing: -0.5px;
+            white-space: nowrap;
         }
 
         .nav-tabs {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-tabs a {
@@ -223,6 +229,7 @@
             transition: color 0.3s ease;
             position: relative;
             padding: 8px 0;
+            white-space: nowrap; /* 모바일에서 탭 이름 줄바꿈 방지 */
         }
 
         .nav-tabs a:hover,
@@ -254,7 +261,7 @@
         }
 
         .hero-section {
-            padding: 90px 20px 70px;
+            padding: 80px 20px 60px;
             text-align: center;
             background: radial-gradient(circle at center, rgba(197, 160, 89, 0.08) 0%, rgba(13, 14, 18, 0) 70%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -270,35 +277,42 @@
             border-radius: 20px;
             margin-bottom: 18px;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .hero-title {
             font-family: 'Noto Serif KR', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 700;
             margin-bottom: 18px;
             color: #fff;
+            word-break: keep-all;
         }
 
         .hero-meta {
             color: var(--text-sub);
-            font-size: 1rem;
+            font-size: 0.95rem;
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
+            line-height: 1.7;
+        }
+
+        .hero-meta span {
+            white-space: nowrap;
         }
 
         /* 섹션 공통 스타일 */
         .section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 90px 20px;
+            padding: 80px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .section-header {
-            margin-bottom: 50px;
+            margin-bottom: 45px;
             text-align: center;
         }
 
@@ -306,9 +320,10 @@
             font-family: 'Noto Serif KR', serif;
             font-size: 2rem;
             color: var(--accent-gold-light);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             position: relative;
             display: inline-block;
+            letter-spacing: 1px;
         }
 
         .section-subtitle {
@@ -341,7 +356,7 @@
             justify-content: flex-end;
             padding-right: 35px;
             position: relative;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
             width: 50%;
         }
 
@@ -372,7 +387,7 @@
         .timeline-content {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 22px 25px;
+            padding: 20px 22px;
             border-radius: 12px;
             width: 100%;
             transition: transform 0.3s ease;
@@ -388,18 +403,22 @@
             color: var(--accent-gold);
             font-weight: 600;
             margin-bottom: 6px;
+            white-space: nowrap;
         }
 
         .timeline-heading {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 8px;
             color: #fff;
+            word-break: keep-all;
         }
 
         .timeline-desc {
             font-size: 0.9rem;
             color: var(--text-sub);
+            word-break: keep-all;
+            line-height: 1.55;
         }
 
         /* ---------------------------------- */
@@ -408,14 +427,14 @@
         .character-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 22px;
         }
 
         .character-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 25px;
+            padding: 24px;
             transition: all 0.3s ease;
         }
 
@@ -432,23 +451,24 @@
             color: var(--accent-gold);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             background: rgba(197, 160, 89, 0.1);
             padding: 4px 10px;
             border-radius: 4px;
+            white-space: nowrap;
         }
 
         .character-name {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .character-actor {
             font-size: 0.85rem;
             color: var(--text-sub);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .character-desc {
@@ -456,6 +476,8 @@
             color: var(--text-main);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 12px;
+            word-break: keep-all;
+            line-height: 1.55;
         }
 
         /* ---------------------------------- */
@@ -464,14 +486,14 @@
         .issues-list {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 22px;
         }
 
         .issue-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 30px;
+            padding: 26px;
             transition: all 0.3s ease;
         }
 
@@ -482,24 +504,28 @@
 
         .issue-number {
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--accent-gold);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .issue-title {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            word-break: keep-all;
         }
 
         .issue-desc {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--text-sub);
-            margin-bottom: 20px;
-            line-height: 1.7;
+            margin-bottom: 18px;
+            line-height: 1.65;
+            word-break: keep-all;
         }
 
         .issue-perspectives {
@@ -515,6 +541,7 @@
             font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 6px;
+            white-space: nowrap;
         }
 
         .perspective-prosecutor .perspective-tag {
@@ -528,6 +555,8 @@
         .perspective-text {
             font-size: 0.85rem;
             color: var(--text-main);
+            word-break: keep-all;
+            line-height: 1.5;
         }
 
         /* 푸터 */
@@ -539,25 +568,102 @@
             font-size: 0.85rem;
         }
 
-        /* 반응형 디자인 (모바일 화면 지원) */
+        /* ---------------------------------- */
+        /* 4. 모바일 및 태블릿 전용 반응형 스타일 */
+        /* ---------------------------------- */
         @media (max-width: 768px) {
-            .door-title { font-size: 1.7rem; }
-            .hero-title { font-size: 2rem; }
-            .timeline::before { left: 20px; }
-            .timeline-item, .timeline-item:nth-child(even) {
+            header {
+                padding: 0 4%;
+            }
+
+            .nav-logo-text {
+                font-size: 0.95rem;
+            }
+
+            .nav-tabs {
+                gap: 12px;
+            }
+
+            .nav-tabs a {
+                font-size: 0.88rem;
+            }
+
+            .door-title { 
+                font-size: 1.75rem; 
+            }
+
+            .hero-title { 
+                font-size: 1.85rem; 
+            }
+
+            .hero-section {
+                padding: 60px 16px 45px;
+            }
+
+            .section {
+                padding: 65px 16px;
+            }
+
+            /* 모바일에서 타임라인 일자형 배치 */
+            .timeline::before { 
+                left: 18px; 
+            }
+
+            .timeline-item, 
+            .timeline-item:nth-child(even) {
                 width: 100%;
                 margin-left: 0;
-                padding-left: 45px;
+                padding-left: 42px;
                 padding-right: 0;
+                margin-bottom: 30px;
             }
-            .timeline-dot, .timeline-item:nth-child(even) .timeline-dot {
-                left: 12px;
+
+            .timeline-dot, 
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+                right: auto;
             }
+
+            .timeline-content {
+                padding: 16px 18px;
+            }
+
             .issue-perspectives {
                 grid-template-columns: 1fr;
+                gap: 14px;
             }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 480px 이하 초소형 모바일 화면 최적화 (아이폰 SE, 갤럭시 등) */
+        @media (max-width: 480px) {
+            .nav-logo-text {
+                font-size: 0.85rem;
+            }
+
             .nav-tabs {
-                gap: 15px;
+                gap: 10px;
+            }
+
+            .nav-tabs a {
+                font-size: 0.82rem;
+            }
+
+            .hero-title {
+                font-size: 1.55rem;
+            }
+
+            .hero-meta {
+                font-size: 0.88rem;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .issue-card {
+                padding: 20px 16px;
             }
         }
     </style>
@@ -569,7 +675,6 @@
     <!-- ================================================================= -->
     <div id="door-container">
         <div class="door-content">
-            <!-- ✏️ [로고 이미지 경로 변경]: 첨부하신 로고 이미지 파일명(예: logo.png)을 적어주세요 -->
             <img src="logo.png" alt="형사법연구회 로고" class="door-logo">
             
             <div class="door-subtitle">형사법연구회</div>
@@ -588,7 +693,6 @@
     <!-- ================================================================= -->
     <header>
         <a href="#" class="nav-logo">
-            <!-- ✏️ [로고 이미지 경로 변경]: 동일한 로고 파일명 적용 -->
             <img src="logo.png" alt="Logo">
             <span class="nav-logo-text">형사법연구회 모의재판</span>
         </a>
@@ -609,11 +713,9 @@
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
             
-            <!-- ✏️ [사건명/제목 수정] -->
             <h1 class="hero-title">사건명: 2026고합3080</h1>
             
             <div class="hero-meta">
-                <!-- ✏️ [일시 및 장소 수정] -->
                 <span>📅 일시: 2026년 9월 30일 (수요일) 12:30</span>
                 <span>📍 장소: 조선대학교 법과대학 2층 모의법정</span>
             </div>
@@ -627,7 +729,6 @@
             </div>
             
             <div class="timeline">
-                <!-- ✏️ [타임라인 1단계] -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -637,7 +738,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [타임라인 2단계] -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -647,7 +747,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [타임라인 3단계] -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -657,7 +756,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [타임라인 4단계] -->
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -666,41 +764,41 @@
                         <div class="timeline-desc">방미현이 오태풍에 의한 코인투자 실패를 이유로 오태풍에게 이은채의 집에 침입해 현금 3,000만원을 가져오라고 지시함.</div>
                     </div>
                 </div>
-				<!-- ✏️ [타임라인 5단계] -->
+
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-time">2026년 8월 2일 23시 경</div>
                         <div class="timeline-heading">특수강도</div>
                         <div class="timeline-desc">오태풍이 망치를 들고 이은채의 집에 들어가 현금 3,000만원을 강취함.</div>
-					</div>
+                    </div>
                 </div>
-				<!-- ✏️ [타임라인 6단계] -->
+
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-time">2026년 8월 3일 1시 ~ 1시 30분 경</div>
                         <div class="timeline-heading">장물 취득 및 범인도피교사, 범인도피</div>
                         <div class="timeline-desc">오태풍이 훔친 3,000만원을 방미현에게 건네주고 오태풍의 요청으로 방미현이 은신처와 자신 명의의 휴대폰을 구해줌.</div>
-					</div>
+                    </div>
                 </div>
-				<!-- ✏️ [타임라인 7단계] -->
+
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-time">2026년 8월 15일</div>
                         <div class="timeline-heading">특정범죄가중처벌등에관한법률상 운전자폭행</div>
                         <div class="timeline-desc">오태풍이 운전중이던 피해자 김현오를 폭행함.</div>
-					</div>
+                    </div>
                 </div>
-				<!-- ✏️ [타임라인 8단계] -->
+
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-time">2026년 8월 17일~9/30</div>
+                        <div class="timeline-time">2026년 8월 17일 ~ 9월 30일</div>
                         <div class="timeline-heading">구속 및 공소제기, 공판 진행</div>
                         <div class="timeline-desc">구속된 후 9/1에 공소가 제기되어 9/8, 9/15에 1회공판, 2회공판이 진행됐고 9/30에 선고.</div>
-					</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -713,10 +811,8 @@
             </div>
 
             <div class="character-grid">
-                <!-- ✏️ [등장인물 1: 피고인] -->
                 <div class="character-card">
                     <span class="character-role">피고인</span>
-                    <!-- ✏️ [배역명 및 학번/이름 수정] -->
                     <div class="character-name">방미현</div>
                     <div class="character-actor">법학과</div>
                     <div class="character-desc">
@@ -724,7 +820,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [등장인물 2: ] -->
                 <div class="character-card">
                     <span class="character-role">피고인</span>
                     <div class="character-name">오태풍</div>
@@ -734,7 +829,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [등장인물 3: 변호인] -->
                 <div class="character-card">
                     <span class="character-role">피해자</span>
                     <div class="character-name">이은채</div>
@@ -744,7 +838,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [등장인물 4: 피고인] -->
                 <div class="character-card">
                     <span class="character-role">피해자</span>
                     <div class="character-name">김현오</div>
@@ -754,7 +847,6 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [등장인물 5: 증인] -->
                 <div class="character-card">
                     <span class="character-role">피해자</span>
                     <div class="character-name">한별</div>
@@ -774,10 +866,8 @@
             </div>
 
             <div class="issues-list">
-                <!-- ✏️ [쟁점 1] -->
                 <div class="issue-card">
                     <div class="issue-number">ISSUE 01</div>
-                    <!-- ✏️ 쟁점 1 제목 및 설명 수정 -->
                     <h3 class="issue-title">특수강도교사죄의 성립여부 (형법 제334조)</h3>
                     <p class="issue-desc">
                         방미현이 단순히 절도를 시킨 것인지, 아니면 오태풍에게 망치를 휴대하여 강도를 하도록 교사하였는지
@@ -794,10 +884,8 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [쟁점 2] -->
                 <div class="issue-card">
                     <div class="issue-number">ISSUE 02</div>
-                    <!-- ✏️ 쟁점 2 제목 및 설명 수정 -->
                     <h3 class="issue-title">특정범죄가중처벌등에관한법률상 운전자폭행죄 성립 여부 (특가법 제5조의10)</h3>
                     <p class="issue-desc">
                         피해자가 운행하던 125cc 이하 오토바이가 특가법상 "운행 중인 자동차"에 해당하는지
@@ -814,10 +902,8 @@
                     </div>
                 </div>
 
-                <!-- ✏️ [쟁점 3] -->
                 <div class="issue-card">
                     <div class="issue-number">ISSUE 03</div>
-                    <!-- ✏️ 쟁점 3 제목 및 설명 수정 -->
                     <h3 class="issue-title">범인도피교사죄 성립 여부</h3>
                     <p class="issue-desc">
                         오태풍이 방미현에게 은신처와 휴대전화를 제공해 달라고 요청한 행위가 범인도피교사죄에 해당하는지
