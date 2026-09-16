@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>형사법연구회 제6회 형사모의재판</title>
-    <!-- Google Fonts (고급스러운 serif & 깔끔한 sans-serif 폰트) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Reset 및 테마 색상 정의 */
@@ -37,7 +37,6 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
-            /* 한글 단어 단위 줄바꿈 적용 */
             word-break: keep-all;
             overflow-wrap: break-word;
         }
@@ -626,8 +625,8 @@
     <!-- 1. 오프닝 화면 -->
     <div id="door-container">
         <div class="door-content">
-            <!-- 파일명에 맞게 logo.png 경로 변경 가능 -->
-            <img src="logo.png" alt="형사법연구회 로고" class="door-logo">
+            <!-- CLS 로고 적용 -->
+            <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고" class="door-logo">
             
             <div class="door-subtitle">형사법연구회</div>
             <h1 class="door-title">제6회 형사모의재판</h1>
@@ -640,11 +639,11 @@
         </div>
     </div>
 
-    <!-- 2. 상단 헤더 (2줄 로고 적용) -->
+    <!-- 2. 상단 헤더 -->
     <header>
         <a href="#" class="nav-logo">
-            <!-- 파일명에 맞게 logo.png 경로 변경 가능 -->
-            <img src="logo.png" alt="Logo">
+            <!-- CLS 로고 적용 -->
+            <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고">
             <span class="nav-logo-text">
                 <span class="logo-title">형사법연구회</span>
                 <span class="logo-sub">모의재판</span>
@@ -884,7 +883,7 @@
             doorContainer.classList.add('opened');
         }
 
-        // 상단 메뉴 클릭 시 부드러운 스크롤 이동 (헤더 높이 70px 차감 이동)
+        // 상단 메뉴 클릭 시 부드러운 스크롤 이동
         document.querySelectorAll('.nav-tabs a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -892,7 +891,7 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    const headerHeight = 70; // 상단바 높이
+                    const headerHeight = 70;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
@@ -904,7 +903,7 @@
             });
         });
 
-        // 스크롤 시 상단 탭 자동 하이라이트 (Scrollspy)
+        // 스크롤 시 상단 탭 자동 하이라이트
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
 
