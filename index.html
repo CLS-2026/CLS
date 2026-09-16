@@ -23,7 +23,7 @@
             --bg-dark: #0d0e12;
             --bg-card: #181a20;
             --bg-card-hover: #22252e;
-            --accent-gold: #AC8C4F; /* 요청하신 메인 골드 색상 */
+            --accent-gold: #AC8C4F;
             --accent-gold-light: #cfb177;
             --text-main: #e2e4e9;
             --text-sub: #9ea3b0;
@@ -67,43 +67,60 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            display: flex;
             transform-style: preserve-3d;
         }
 
         .door {
-            width: 50%;
+            position: absolute;
+            top: 0;
             height: 100%;
             background: linear-gradient(135deg, #18191d 0%, #0d0e11 100%);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.85);
-            display: flex;
-            align-items: center;
-            position: relative;
             cursor: pointer;
+            border: none; /* 테두리 완벽 제거 */
+            outline: none;
+            transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* 초기 상태: 가운데 줄을 완벽하게 투명 처리 */
+        /* 모바일 서브픽셀 간격 방지를 위해 width를 50.5%로 설정해 미세하게 겹치도록 처리 */
         .door-left {
+            left: 0;
+            width: 50.5%; 
             transform-origin: left center;
-            border-right: 1px solid transparent;
-            transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.3s ease;
         }
 
         .door-right {
+            right: 0;
+            width: 50.5%;
             transform-origin: right center;
-            border-left: 1px solid transparent;
-            transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1), border-color 0.3s ease;
         }
 
-        /* 입장 클릭 시(opened): 가운데 금색 줄이 생성되며 문이 열림 */
+        /* 입장 클릭 시 문 열림 */
         #door-container.opened .door-left {
             transform: rotateY(-105deg);
-            border-right-color: rgba(172, 140, 79, 0.6);
         }
-
         #door-container.opened .door-right {
             transform: rotateY(105deg);
-            border-left-color: rgba(172, 140, 79, 0.6);
+        }
+
+        /* 입장 클릭 시 생성되는 금빛 라인 이펙트 */
+        .door-glow {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: rgba(172, 140, 79, 0.8);
+            box-shadow: 0 0 20px rgba(172, 140, 79, 0.6);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 5;
+        }
+
+        .door-left .door-glow { right: 0; }
+        .door-right .door-glow { left: 0; }
+
+        #door-container.opened .door-glow {
+            opacity: 1; /* 열리는 순간 금빛 선이 나타남 */
         }
 
         .door-content {
@@ -124,7 +141,6 @@
             opacity: 0;
         }
 
-        /* [오프닝 화면 로고 - #AC8C4F 색상 필터] */
         .door-logo {
             width: 140px;
             height: auto;
@@ -203,7 +219,6 @@
             flex-shrink: 0;
         }
 
-        /* [상단바 로고 - #AC8C4F 색상 필터] */
         .nav-logo img {
             height: 38px;
             width: auto;
@@ -635,8 +650,13 @@
         </div>
 
         <div class="door-wrapper" onclick="openCourtDoor()">
-            <div class="door door-left"></div>
-            <div class="door door-right"></div>
+            <!-- 수정사항: door 내부에 별도의 door-glow 요소를 배치 -->
+            <div class="door door-left">
+                <div class="door-glow"></div>
+            </div>
+            <div class="door door-right">
+                <div class="door-glow"></div>
+            </div>
         </div>
     </div>
 
@@ -662,7 +682,7 @@
     <main>
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
-            <h1 class="hero-title">사건명: 2026고합3080</h1>
+            <h1 class="hero-title">사건명: 2026고합 3080</h1>
             <div class="hero-meta">
                 <span>📅 일시: 2026년 9월 30일 (수요일) 12:30</span>
                 <span>📍 장소: 조선대학교 법과대학 2층 모의법정</span>
