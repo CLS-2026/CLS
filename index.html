@@ -201,17 +201,34 @@
         }
 
         .nav-logo img {
-            height: 32px;
+            height: 36px;
             border-radius: 4px;
             background: #fff;
             padding: 2px;
         }
 
+        /* 로고 텍스트 2줄 구조 설정 */
         .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.25;
+        }
+
+        .logo-title {
             font-family: 'Noto Serif KR', serif;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
+            color: var(--text-main);
             letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            letter-spacing: 0.5px;
             white-space: nowrap;
         }
 
@@ -576,8 +593,12 @@
                 padding: 0 4%;
             }
 
-            .nav-logo-text {
-                font-size: 0.95rem;
+            .logo-title {
+                font-size: 0.88rem;
+            }
+
+            .logo-sub {
+                font-size: 0.7rem;
             }
 
             .nav-tabs {
@@ -640,8 +661,12 @@
 
         /* 480px 이하 초소형 모바일 화면 최적화 (아이폰 SE, 갤럭시 등) */
         @media (max-width: 480px) {
-            .nav-logo-text {
-                font-size: 0.85rem;
+            .logo-title {
+                font-size: 0.82rem;
+            }
+
+            .logo-sub {
+                font-size: 0.65rem;
             }
 
             .nav-tabs {
@@ -694,7 +719,10 @@
     <header>
         <a href="#" class="nav-logo">
             <img src="logo.png" alt="Logo">
-            <span class="nav-logo-text">형사법연구회 모의재판</span>
+            <span class="nav-logo-text">
+                <span class="logo-title">형사법연구회</span>
+                <span class="logo-sub">모의재판</span>
+            </span>
         </a>
         <nav>
             <ul class="nav-tabs">
@@ -713,7 +741,7 @@
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
             
-            <h1 class="hero-title">사건명: 2026고합3080</h1>
+            <h1 class="hero-title">사건명: 2026고합 3080</h1>
             
             <div class="hero-meta">
                 <span>📅 일시: 2026년 9월 30일 (수요일) 12:30</span>
