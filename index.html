@@ -14,6 +14,11 @@
             box-sizing: border-box;
         }
 
+        /* 부드러운 스크롤 기본 설정 */
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
             --bg-dark: #0d0e12;
             --bg-card: #181a20;
@@ -32,8 +37,7 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
-            scroll-behavior: smooth;
-            /* 한글 단어 단위 줄바꿈 적용 (글자 중간에 잘리지 않음) */
+            /* 한글 단어 단위 줄바꿈 적용 */
             word-break: keep-all;
             overflow-wrap: break-word;
         }
@@ -54,7 +58,6 @@
             transition: opacity 0.8s ease 1s, visibility 0.8s ease 1s;
         }
 
-        /* 문이 열린 후 메인 화면 클릭 가능하도록 숨김 */
         #door-container.opened {
             opacity: 0;
             visibility: hidden;
@@ -92,7 +95,6 @@
             border-left: 1px solid rgba(197, 160, 89, 0.4);
         }
 
-        /* 문이 열릴 때 Y축 회전 애니메이션 */
         #door-container.opened .door-left {
             transform: rotateY(-105deg);
         }
@@ -101,7 +103,6 @@
             transform: rotateY(105deg);
         }
 
-        /* 오프닝 중앙 타이틀 & 로고 컨텐츠 */
         .door-content {
             position: absolute;
             top: 50%;
@@ -120,6 +121,7 @@
             opacity: 0;
         }
 
+        /* [오프닝 화면 로고 이미지 크기] */
         .door-logo {
             width: 130px;
             height: auto;
@@ -200,6 +202,7 @@
             flex-shrink: 0;
         }
 
+        /* [상단바 로고 이미지 크기] */
         .nav-logo img {
             height: 36px;
             border-radius: 4px;
@@ -207,7 +210,6 @@
             padding: 2px;
         }
 
-        /* 로고 텍스트 2줄 구조 설정 */
         .nav-logo-text {
             display: flex;
             flex-direction: column;
@@ -246,7 +248,7 @@
             transition: color 0.3s ease;
             position: relative;
             padding: 8px 0;
-            white-space: nowrap; /* 모바일에서 탭 이름 줄바꿈 방지 */
+            white-space: nowrap;
         }
 
         .nav-tabs a:hover,
@@ -320,7 +322,6 @@
             white-space: nowrap;
         }
 
-        /* 섹션 공통 스타일 */
         .section {
             max-width: 1000px;
             margin: 0 auto;
@@ -348,9 +349,7 @@
             font-size: 0.95rem;
         }
 
-        /* ---------------------------------- */
-        /* 3-1. 타임라인 섹션 */
-        /* ---------------------------------- */
+        /* 타임라인 */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -438,9 +437,7 @@
             line-height: 1.55;
         }
 
-        /* ---------------------------------- */
-        /* 3-2. 등장인물 섹션 */
-        /* ---------------------------------- */
+        /* 등장인물 */
         .character-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -497,9 +494,7 @@
             line-height: 1.55;
         }
 
-        /* ---------------------------------- */
-        /* 3-3. 쟁점 섹션 */
-        /* ---------------------------------- */
+        /* 쟁점 */
         .issues-list {
             display: flex;
             flex-direction: column;
@@ -576,7 +571,6 @@
             line-height: 1.5;
         }
 
-        /* 푸터 */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -585,51 +579,19 @@
             font-size: 0.85rem;
         }
 
-        /* ---------------------------------- */
-        /* 4. 모바일 및 태블릿 전용 반응형 스타일 */
-        /* ---------------------------------- */
+        /* 모바일 최적화 */
         @media (max-width: 768px) {
-            header {
-                padding: 0 4%;
-            }
+            header { padding: 0 4%; }
+            .logo-title { font-size: 0.88rem; }
+            .logo-sub { font-size: 0.7rem; }
+            .nav-tabs { gap: 12px; }
+            .nav-tabs a { font-size: 0.88rem; }
+            .door-title { font-size: 1.75rem; }
+            .hero-title { font-size: 1.85rem; }
+            .hero-section { padding: 60px 16px 45px; }
+            .section { padding: 65px 16px; }
 
-            .logo-title {
-                font-size: 0.88rem;
-            }
-
-            .logo-sub {
-                font-size: 0.7rem;
-            }
-
-            .nav-tabs {
-                gap: 12px;
-            }
-
-            .nav-tabs a {
-                font-size: 0.88rem;
-            }
-
-            .door-title { 
-                font-size: 1.75rem; 
-            }
-
-            .hero-title { 
-                font-size: 1.85rem; 
-            }
-
-            .hero-section {
-                padding: 60px 16px 45px;
-            }
-
-            .section {
-                padding: 65px 16px;
-            }
-
-            /* 모바일에서 타임라인 일자형 배치 */
-            .timeline::before { 
-                left: 18px; 
-            }
-
+            .timeline::before { left: 18px; }
             .timeline-item, 
             .timeline-item:nth-child(even) {
                 width: 100%;
@@ -638,68 +600,33 @@
                 padding-right: 0;
                 margin-bottom: 30px;
             }
-
             .timeline-dot, 
             .timeline-item:nth-child(even) .timeline-dot {
                 left: 10px;
                 right: auto;
             }
-
-            .timeline-content {
-                padding: 16px 18px;
-            }
-
-            .issue-perspectives {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
-
-            .character-grid {
-                grid-template-columns: 1fr;
-            }
+            .timeline-content { padding: 16px 18px; }
+            .issue-perspectives { grid-template-columns: 1fr; gap: 14px; }
+            .character-grid { grid-template-columns: 1fr; }
         }
 
-        /* 480px 이하 초소형 모바일 화면 최적화 (아이폰 SE, 갤럭시 등) */
         @media (max-width: 480px) {
-            .logo-title {
-                font-size: 0.82rem;
-            }
-
-            .logo-sub {
-                font-size: 0.65rem;
-            }
-
-            .nav-tabs {
-                gap: 10px;
-            }
-
-            .nav-tabs a {
-                font-size: 0.82rem;
-            }
-
-            .hero-title {
-                font-size: 1.55rem;
-            }
-
-            .hero-meta {
-                font-size: 0.88rem;
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .issue-card {
-                padding: 20px 16px;
-            }
+            .logo-title { font-size: 0.82rem; }
+            .logo-sub { font-size: 0.65rem; }
+            .nav-tabs { gap: 10px; }
+            .nav-tabs a { font-size: 0.82rem; }
+            .hero-title { font-size: 1.55rem; }
+            .hero-meta { font-size: 0.88rem; flex-direction: column; gap: 6px; }
+            .issue-card { padding: 20px 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================================================================= -->
-    <!-- 1. 법정문 오프닝 화면 (클릭 시 문이 열리며 메인화면 진입) -->
-    <!-- ================================================================= -->
+    <!-- 1. 오프닝 화면 -->
     <div id="door-container">
         <div class="door-content">
+            <!-- 파일명에 맞게 logo.png 경로 변경 가능 -->
             <img src="logo.png" alt="형사법연구회 로고" class="door-logo">
             
             <div class="door-subtitle">형사법연구회</div>
@@ -713,11 +640,10 @@
         </div>
     </div>
 
-    <!-- ================================================================= -->
-    <!-- 2. 상단 네비게이션 헤더 (스크롤 시 고정) -->
-    <!-- ================================================================= -->
+    <!-- 2. 상단 헤더 (2줄 로고 적용) -->
     <header>
         <a href="#" class="nav-logo">
+            <!-- 파일명에 맞게 logo.png 경로 변경 가능 -->
             <img src="logo.png" alt="Logo">
             <span class="nav-logo-text">
                 <span class="logo-title">형사법연구회</span>
@@ -733,23 +659,18 @@
         </nav>
     </header>
 
-    <!-- ================================================================= -->
-    <!-- 3. 메인 컨텐츠 영역 -->
-    <!-- ================================================================= -->
+    <!-- 3. 메인 컨텐츠 -->
     <main>
-        <!-- 메인 사건 제목 및 장소/일시 안내 -->
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
-            
             <h1 class="hero-title">사건명: 2026고합 3080</h1>
-            
             <div class="hero-meta">
                 <span>📅 일시: 2026년 9월 30일 (수요일) 12:30</span>
                 <span>📍 장소: 조선대학교 법과대학 2층 모의법정</span>
             </div>
         </section>
 
-        <!-- (1) 타임라인 섹션 -->
+        <!-- 타임라인 -->
         <section id="timeline" class="section">
             <div class="section-header">
                 <h2 class="section-title">TIMELINE</h2>
@@ -831,7 +752,7 @@
             </div>
         </section>
 
-        <!-- (2) 등장인물 섹션 -->
+        <!-- 등장인물 -->
         <section id="characters" class="section">
             <div class="section-header">
                 <h2 class="section-title">CHARACTERS</h2>
@@ -886,7 +807,7 @@
             </div>
         </section>
 
-        <!-- (3) 주요 쟁점 섹션 -->
+        <!-- 주요 쟁점 -->
         <section id="issues" class="section">
             <div class="section-header">
                 <h2 class="section-title">KEY ISSUES</h2>
@@ -951,19 +872,37 @@
         </section>
     </main>
 
-    <!-- 푸터 -->
     <footer>
         <p>&copy; 형사법연구회. All Rights Reserved.</p>
         <p style="margin-top: 5px; color: #666;">제6회 형사모의재판</p>
     </footer>
 
-    <!-- 자바스크립트 (오프닝 문 열기 & 상단 탭 스크롤 반응) -->
     <script>
-        // 법정문 열기 동작
+        // 법정문 열기
         function openCourtDoor() {
             const doorContainer = document.getElementById('door-container');
             doorContainer.classList.add('opened');
         }
+
+        // 상단 메뉴 클릭 시 부드러운 스크롤 이동 (헤더 높이 70px 차감 이동)
+        document.querySelectorAll('.nav-tabs a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = 70; // 상단바 높이
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
         // 스크롤 시 상단 탭 자동 하이라이트 (Scrollspy)
         const sections = document.querySelectorAll('section[id]');
