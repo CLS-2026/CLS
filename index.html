@@ -120,15 +120,14 @@
             opacity: 0;
         }
 
-        /* [오프닝 화면 로고 이미지 크기] */
+        /* [오프닝 화면 로고 - 흰 배경 제거 및 골드 변환] */
         .door-logo {
-            width: 130px;
+            width: 140px;
             height: auto;
-            margin-bottom: 25px;
-            filter: drop-shadow(0px 4px 12px rgba(0,0,0,0.8));
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 8px;
+            margin-bottom: 20px;
+            /* 흰색 배경 투명화 및 골드 필터 적용 */
+            filter: invert(72%) sepia(45%) saturate(450%) hue-rotate(7deg) brightness(95%);
+            mix-blend-mode: screen;
         }
 
         .door-subtitle {
@@ -195,18 +194,19 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: var(--text-main);
             flex-shrink: 0;
         }
 
-        /* [상단바 로고 이미지 크기] */
+        /* [상단바 로고 - 흰 배경 제거 및 골드 변환] */
         .nav-logo img {
-            height: 36px;
-            border-radius: 4px;
-            background: #fff;
-            padding: 2px;
+            height: 38px;
+            width: auto;
+            /* 흰색 배경 투명화 및 골드 필터 적용 */
+            filter: invert(72%) sepia(45%) saturate(450%) hue-rotate(7deg) brightness(95%);
+            mix-blend-mode: screen;
         }
 
         .nav-logo-text {
@@ -625,7 +625,6 @@
     <!-- 1. 오프닝 화면 -->
     <div id="door-container">
         <div class="door-content">
-            <!-- CLS 로고 적용 -->
             <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고" class="door-logo">
             
             <div class="door-subtitle">형사법연구회</div>
@@ -642,7 +641,6 @@
     <!-- 2. 상단 헤더 -->
     <header>
         <a href="#" class="nav-logo">
-            <!-- CLS 로고 적용 -->
             <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고">
             <span class="nav-logo-text">
                 <span class="logo-title">형사법연구회</span>
