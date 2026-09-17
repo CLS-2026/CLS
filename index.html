@@ -14,7 +14,6 @@
             box-sizing: border-box;
         }
 
-        /* 부드러운 스크롤 기본 설정 */
         html {
             scroll-behavior: smooth;
         }
@@ -29,6 +28,8 @@
             --text-sub: #9ea3b0;
             --border-color: rgba(172, 140, 79, 0.25);
             --header-height: 70px;
+            --tag-defendant: #ff6b6b;
+            --tag-victim: #4dabf7;
         }
 
         body {
@@ -77,12 +78,11 @@
             background: linear-gradient(135deg, #18191d 0%, #0d0e11 100%);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.85);
             cursor: pointer;
-            border: none; /* 테두리 완벽 제거 */
+            border: none;
             outline: none;
             transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* 모바일 서브픽셀 간격 방지를 위해 width를 50.5%로 설정해 미세하게 겹치도록 처리 */
         .door-left {
             left: 0;
             width: 50.5%; 
@@ -95,15 +95,9 @@
             transform-origin: right center;
         }
 
-        /* 입장 클릭 시 문 열림 */
-        #door-container.opened .door-left {
-            transform: rotateY(-105deg);
-        }
-        #door-container.opened .door-right {
-            transform: rotateY(105deg);
-        }
+        #door-container.opened .door-left { transform: rotateY(-105deg); }
+        #door-container.opened .door-right { transform: rotateY(105deg); }
 
-        /* 입장 클릭 시 생성되는 금빛 라인 이펙트 */
         .door-glow {
             position: absolute;
             top: 0;
@@ -118,10 +112,7 @@
 
         .door-left .door-glow { right: 0; }
         .door-right .door-glow { left: 0; }
-
-        #door-container.opened .door-glow {
-            opacity: 1; /* 열리는 순간 금빛 선이 나타남 */
-        }
+        #door-container.opened .door-glow { opacity: 1; }
 
         .door-content {
             position: absolute;
@@ -137,9 +128,7 @@
             transition: opacity 0.5s ease;
         }
 
-        #door-container.opened .door-content {
-            opacity: 0;
-        }
+        #door-container.opened .door-content { opacity: 0; }
 
         .door-logo {
             width: 140px;
@@ -267,10 +256,7 @@
             white-space: nowrap;
         }
 
-        .nav-tabs a:hover,
-        .nav-tabs a.active {
-            color: var(--accent-gold);
-        }
+        .nav-tabs a:hover, .nav-tabs a.active { color: var(--accent-gold); }
 
         .nav-tabs a::after {
             content: '';
@@ -283,17 +269,12 @@
             transition: width 0.3s ease;
         }
 
-        .nav-tabs a:hover::after,
-        .nav-tabs a.active::after {
-            width: 100%;
-        }
+        .nav-tabs a:hover::after, .nav-tabs a.active::after { width: 100%; }
 
         /* ---------------------------------- */
         /* 3. 본문 컨텐츠 레이아웃 */
         /* ---------------------------------- */
-        main {
-            margin-top: var(--header-height);
-        }
+        main { margin-top: var(--header-height); }
 
         .hero-section {
             padding: 80px 20px 60px;
@@ -334,9 +315,7 @@
             line-height: 1.7;
         }
 
-        .hero-meta span {
-            white-space: nowrap;
-        }
+        .hero-meta span { white-space: nowrap; }
 
         .section {
             max-width: 1000px;
@@ -363,6 +342,169 @@
         .section-subtitle {
             color: var(--text-sub);
             font-size: 0.95rem;
+        }
+
+        /* ---------------------------------- */
+        /* 4. 신규: 반응형 인물관계도 스타일 */
+        /* ---------------------------------- */
+        .relation-map-container {
+            background: rgba(24, 26, 32, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .relation-map-title {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold-light);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .relation-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* 노드 행 구성 */
+        .relation-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* 인물 노드 카드 */
+        .rel-node {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 18px;
+            min-width: 130px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .rel-node.defendant { border-color: rgba(255, 107, 107, 0.5); }
+        .rel-node.victim { border-color: rgba(77, 171, 247, 0.5); }
+
+        .rel-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+
+        .rel-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .rel-badge.def { background: rgba(255, 107, 107, 0.2); color: var(--tag-defendant); }
+        .rel-badge.vic { background: rgba(77, 171, 247, 0.2); color: var(--tag-victim); }
+
+        .rel-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* 연결 라인 & 관계 태그 */
+        .rel-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            position: relative;
+        }
+
+        .rel-line {
+            height: 2px;
+            background: var(--border-color);
+            width: 100%;
+            min-width: 40px;
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+        }
+
+        .rel-label {
+            position: relative;
+            z-index: 2;
+            background: #252830;
+            border: 1px solid var(--border-color);
+            color: var(--accent-gold-light);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .rel-label.no-relationship {
+            color: var(--text-sub);
+            border-style: dashed;
+            background: rgba(30, 32, 40, 0.9);
+        }
+
+        /* 하단 수평 관계 박스 */
+        .relation-group-box {
+            border: 1px dashed rgba(172, 140, 79, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(0,0,0,0.2);
+            width: 100%;
+        }
+
+        .relation-group-title {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .relation-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+        }
+
+        .rel-pair {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .rel-pair-person {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* 타임라인 */
@@ -572,13 +714,8 @@
             white-space: nowrap;
         }
 
-        .perspective-prosecutor .perspective-tag {
-            color: #ff6b6b;
-        }
-
-        .perspective-defense .perspective-tag {
-            color: #4dabf7;
-        }
+        .perspective-prosecutor .perspective-tag { color: #ff6b6b; }
+        .perspective-defense .perspective-tag { color: #4dabf7; }
 
         .perspective-text {
             font-size: 0.85rem;
@@ -624,6 +761,14 @@
             .timeline-content { padding: 16px 18px; }
             .issue-perspectives { grid-template-columns: 1fr; gap: 14px; }
             .character-grid { grid-template-columns: 1fr; }
+
+            /* 관계도 모바일 최적화 */
+            .relation-row { gap: 10px; }
+            .rel-node { min-width: 100px; padding: 10px; }
+            .rel-name { font-size: 0.95rem; }
+            .rel-label { font-size: 0.7rem; padding: 3px 7px; }
+            .rel-line { min-width: 25px; }
+            .relation-sub-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
@@ -634,6 +779,10 @@
             .hero-title { font-size: 1.55rem; }
             .hero-meta { font-size: 0.88rem; flex-direction: column; gap: 6px; }
             .issue-card { padding: 20px 16px; }
+            
+            .relation-row { flex-direction: column; width: 100%; }
+            .rel-connector { margin: 4px 0; }
+            .rel-line { width: 2px; height: 20px; top: auto; left: 50%; transform: translateX(-50%); }
         }
     </style>
 </head>
@@ -643,14 +792,12 @@
     <div id="door-container">
         <div class="door-content">
             <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고" class="door-logo">
-            
             <div class="door-subtitle">형사법연구회</div>
             <h1 class="door-title">제6회 형사모의재판</h1>
             <button class="enter-btn" onclick="openCourtDoor()">법정 입장하기</button>
         </div>
 
         <div class="door-wrapper" onclick="openCourtDoor()">
-            <!-- 수정사항: door 내부에 별도의 door-glow 요소를 배치 -->
             <div class="door door-left">
                 <div class="door-glow"></div>
             </div>
@@ -682,7 +829,7 @@
     <main>
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
-            <h1 class="hero-title">사건명: 2026고합3080</h1>
+            <h1 class="hero-title">사건명: 2026고합 3080</h1>
             <div class="hero-meta">
                 <span>📅 일시: 2026년 9월 30일 (수요일) 12:30</span>
                 <span>📍 장소: 조선대학교 법과대학 2층 모의법정</span>
@@ -771,13 +918,82 @@
             </div>
         </section>
 
-        <!-- 등장인물 -->
+        <!-- 등장인물 섹션 -->
         <section id="characters" class="section">
             <div class="section-header">
                 <h2 class="section-title">CHARACTERS</h2>
-                <p class="section-subtitle">이번 모의재판을 이끌어가는 등장인물 소개</p>
+                <p class="section-subtitle">이번 모의재판을 이끌어가는 등장인물 및 관계도</p>
             </div>
 
+            <!-- 신규: 반응형 인물관계도 영역 -->
+            <div class="relation-map-container">
+                <div class="relation-map-title">
+                    <span>⚖️</span> 사건 인물관계도
+                </div>
+
+                <div class="relation-grid">
+                    <!-- 1행: 피고인 - 친족 관계 -->
+                    <div class="relation-row">
+                        <div class="rel-node defendant">
+                            <span class="rel-badge def">피고인</span>
+                            <div class="rel-name">방미현</div>
+                        </div>
+
+                        <div class="rel-connector">
+                            <div class="rel-line"></div>
+                            <span class="rel-label">사촌 남매</span>
+                        </div>
+
+                        <div class="rel-node defendant">
+                            <span class="rel-badge def">피고인</span>
+                            <div class="rel-name">오태풍</div>
+                        </div>
+                    </div>
+
+                    <!-- 2행: 핵심 피고인 - 피해자 연결 -->
+                    <div class="relation-row">
+                        <div class="rel-node defendant">
+                            <span class="rel-badge def">피고인</span>
+                            <div class="rel-name">방미현</div>
+                        </div>
+
+                        <div class="rel-connector">
+                            <div class="rel-line"></div>
+                            <span class="rel-label">올케 - 시누이 (오빠의 아내)</span>
+                        </div>
+
+                        <div class="rel-node victim">
+                            <span class="rel-badge vic">피해자</span>
+                            <div class="rel-name">이은채</div>
+                        </div>
+                    </div>
+
+                    <!-- 3행: 세부 인물 관계망 요약 -->
+                    <div class="relation-group-box">
+                        <div class="relation-group-title">기타 인물 간 사전 관계 및 일면식 유무</div>
+                        <div class="relation-sub-grid">
+                            <div class="rel-pair">
+                                <div class="rel-pair-person"><span>오태풍</span> ↔ <span>이은채</span></div>
+                                <span class="rel-label">3~4회 만난 일면식 있음</span>
+                            </div>
+                            <div class="rel-pair">
+                                <div class="rel-pair-person"><span>이은채</span> ↔ <span>한별</span></div>
+                                <span class="rel-label">지인 관계</span>
+                            </div>
+                            <div class="rel-pair">
+                                <div class="rel-pair-person"><span>한별</span> ↔ <span>오태풍·방미현</span></div>
+                                <span class="rel-label no-relationship">일면식 없음</span>
+                            </div>
+                            <div class="rel-pair">
+                                <div class="rel-pair-person"><span>오태풍</span> ↔ <span>김현오</span></div>
+                                <span class="rel-label no-relationship">일면식 없음</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 기존 카드형 인물 상세 목록 -->
             <div class="character-grid">
                 <div class="character-card">
                     <span class="character-role">피고인</span>
@@ -818,7 +1034,7 @@
                 <div class="character-card">
                     <span class="character-role">피해자</span>
                     <div class="character-name">한별</div>
-                    <div class="character-actor">공공인재법무학과</div>
+                    <div class="character-actor">법학과</div>
                     <div class="character-desc">
                         피고인 오태풍과 피해자 이은채가 함바식당에서 시비가 붙은 것을 말리다 오태풍에게 횟칼로 찔림.
                     </div>
@@ -897,13 +1113,11 @@
     </footer>
 
     <script>
-        // 법정문 열기
         function openCourtDoor() {
             const doorContainer = document.getElementById('door-container');
             doorContainer.classList.add('opened');
         }
 
-        // 상단 메뉴 클릭 시 부드러운 스크롤 이동
         document.querySelectorAll('.nav-tabs a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -923,7 +1137,6 @@
             });
         });
 
-        // 스크롤 시 상단 탭 자동 하이라이트
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
 
