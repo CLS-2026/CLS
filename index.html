@@ -28,7 +28,6 @@
             --text-main: #f0f2f5;
             --text-sub: #9ca3af;
             --border-color: rgba(197, 160, 89, 0.22);
-            --border-glow: rgba(197, 160, 89, 0.45);
             --header-height: 70px;
         }
 
@@ -42,9 +41,7 @@
             overflow-wrap: break-word;
         }
 
-        /* ---------------------------------- */
-        /* 1. 법정문 오프닝 애니메이션 영역 */
-        /* ---------------------------------- */
+        /* 1. 오프닝 영역 */
         #door-container {
             position: fixed;
             top: 0;
@@ -154,7 +151,6 @@
             letter-spacing: -0.5px;
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-            word-break: keep-all;
         }
 
         .enter-btn {
@@ -180,9 +176,7 @@
             transform: translateY(-2px);
         }
 
-        /* ---------------------------------- */
-        /* 2. 상단 네비게이션 헤더 */
-        /* ---------------------------------- */
+        /* 2. 네비게이션 헤더 */
         header {
             position: fixed;
             top: 0;
@@ -205,7 +199,6 @@
             gap: 12px;
             text-decoration: none;
             color: var(--text-main);
-            flex-shrink: 0;
         }
 
         .nav-logo img {
@@ -218,7 +211,6 @@
         .nav-logo-text {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             line-height: 1.25;
         }
 
@@ -227,16 +219,12 @@
             font-weight: 700;
             font-size: 0.95rem;
             color: var(--text-main);
-            letter-spacing: -0.5px;
-            white-space: nowrap;
         }
 
         .logo-sub {
             font-size: 0.75rem;
             color: var(--accent-gold);
             font-weight: 600;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
         }
 
         .nav-tabs {
@@ -253,7 +241,6 @@
             transition: color 0.3s ease;
             position: relative;
             padding: 8px 0;
-            white-space: nowrap;
         }
 
         .nav-tabs a:hover, .nav-tabs a.active { color: var(--accent-gold); }
@@ -271,9 +258,7 @@
 
         .nav-tabs a:hover::after, .nav-tabs a.active::after { width: 100%; }
 
-        /* ---------------------------------- */
-        /* 3. 본문 및 섹션 공통 */
-        /* ---------------------------------- */
+        /* 3. 본문 공통 */
         main { margin-top: var(--header-height); }
 
         .hero-section {
@@ -293,7 +278,6 @@
             border-radius: 20px;
             margin-bottom: 18px;
             letter-spacing: 1px;
-            white-space: nowrap;
         }
 
         .hero-title {
@@ -302,7 +286,6 @@
             font-weight: 700;
             margin-bottom: 18px;
             color: #fff;
-            word-break: keep-all;
         }
 
         .hero-meta {
@@ -312,10 +295,7 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            line-height: 1.7;
         }
-
-        .hero-meta span { white-space: nowrap; }
 
         .section {
             max-width: 1050px;
@@ -334,8 +314,6 @@
             font-size: 2rem;
             color: var(--accent-gold-light);
             margin-bottom: 8px;
-            position: relative;
-            display: inline-block;
             letter-spacing: 1px;
         }
 
@@ -344,223 +322,31 @@
             font-size: 0.95rem;
         }
 
-        /* ---------------------------------- */
-        /* 4. [고도화] 반응형 인물관계도 디자인 */
-        /* ---------------------------------- */
-        .relation-board {
-            background: rgba(18, 20, 26, 0.75);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 35px 25px;
-            margin-bottom: 60px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(197, 160, 89, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .relation-board::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-        }
-
-        .board-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .board-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-gold-light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .board-legend {
-            display: flex;
-            gap: 15px;
-            font-size: 0.8rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-sub);
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .legend-dot.def { background-color: var(--accent-red); box-shadow: 0 0 8px rgba(224, 82, 82, 0.6); }
-        .legend-dot.vic { background-color: var(--accent-blue); box-shadow: 0 0 8px rgba(77, 150, 255, 0.6); }
-
-        /* 노드 배치 그리드 */
-        .relation-network {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        /* 삼각 메인 노드 구조 */
-        .main-nodes-container {
-            display: grid;
-            grid-template-columns: 1fr 140px 1fr;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 25px 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .node-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 16px 20px;
-            text-align: center;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .node-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.2);
-        }
-
-        .node-card.def-type {
-            border-left: 4px solid var(--accent-red);
-        }
-
-        .node-card.vic-type {
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .node-role-tag {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .def-type .node-role-tag { background: rgba(224, 82, 82, 0.15); color: var(--accent-red); }
-        .vic-type .node-role-tag { background: rgba(77, 150, 255, 0.15); color: var(--accent-blue); }
-
-        .node-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* 수평 커넥터 */
-        .link-connector {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .link-line {
+        /* 4. 이미지 전용 인물관계도 스타일 */
+        .relation-image-wrap {
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(197, 160, 89, 0.2), var(--accent-gold), rgba(197, 160, 89, 0.2));
-            position: absolute;
-            top: 50%;
-            z-index: 1;
+            margin-bottom: 50px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            background: #111318;
+            transition: transform 0.3s ease;
         }
 
-        .link-badge {
-            position: relative;
-            z-index: 2;
-            background: #1e222d;
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold-light);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 20px;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        .relation-image-wrap:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
         }
 
-        /* 서브 노드 및 추가 관계 그리드 */
-        .sub-network-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
+        .relation-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
         }
 
-        .relation-pill-card {
-            background: rgba(22, 25, 32, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.3s ease;
-        }
-
-        .relation-pill-card:hover {
-            background: rgba(30, 34, 45, 0.8);
-            border-color: rgba(197, 160, 89, 0.3);
-        }
-
-        .pill-parties {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .pill-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-sub);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            white-space: nowrap;
-        }
-
-        .pill-tag.highlight {
-            background: rgba(197, 160, 89, 0.12);
-            color: var(--accent-gold-light);
-            border-color: rgba(197, 160, 89, 0.3);
-        }
-
-        .pill-tag.none {
-            background: rgba(255, 255, 255, 0.02);
-            color: #6b7280;
-            border-style: dashed;
-        }
-
-        /* ---------------------------------- */
-        /* 5. 타임라인 / 등장인물 / 쟁점 카드 */
-        /* ---------------------------------- */
+        /* 5. 타임라인 및 등장인물, 쟁점 */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -628,7 +414,6 @@
             color: var(--accent-gold);
             font-weight: 600;
             margin-bottom: 6px;
-            white-space: nowrap;
         }
 
         .timeline-heading {
@@ -636,13 +421,11 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: #fff;
-            word-break: keep-all;
         }
 
         .timeline-desc {
             font-size: 0.9rem;
             color: var(--text-sub);
-            word-break: keep-all;
             line-height: 1.55;
         }
 
@@ -676,7 +459,6 @@
             background: rgba(197, 160, 89, 0.1);
             padding: 4px 10px;
             border-radius: 4px;
-            white-space: nowrap;
         }
 
         .character-name {
@@ -697,7 +479,6 @@
             color: var(--text-main);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 12px;
-            word-break: keep-all;
             line-height: 1.55;
         }
 
@@ -727,7 +508,6 @@
             color: var(--accent-gold);
             margin-bottom: 6px;
             letter-spacing: 1px;
-            white-space: nowrap;
         }
 
         .issue-title {
@@ -735,7 +515,6 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 12px;
-            word-break: keep-all;
         }
 
         .issue-desc {
@@ -743,7 +522,6 @@
             color: var(--text-sub);
             margin-bottom: 18px;
             line-height: 1.65;
-            word-break: keep-all;
         }
 
         .issue-perspectives {
@@ -759,7 +537,6 @@
             font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 6px;
-            white-space: nowrap;
         }
 
         .perspective-prosecutor .perspective-tag { color: var(--accent-red); }
@@ -768,7 +545,6 @@
         .perspective-text {
             font-size: 0.85rem;
             color: var(--text-main);
-            word-break: keep-all;
             line-height: 1.5;
         }
 
@@ -780,16 +556,9 @@
             font-size: 0.85rem;
         }
 
-        /* ---------------------------------- */
-        /* 6. 모바일 완벽 최적화 미디어 쿼리 */
-        /* ---------------------------------- */
         @media (max-width: 768px) {
             header { padding: 0 4%; }
-            .logo-title { font-size: 0.88rem; }
-            .logo-sub { font-size: 0.7rem; }
             .nav-tabs { gap: 12px; }
-            .nav-tabs a { font-size: 0.88rem; }
-            .door-title { font-size: 1.75rem; }
             .hero-title { font-size: 1.85rem; }
             .hero-section { padding: 60px 16px 45px; }
             .section { padding: 65px 16px; }
@@ -806,43 +575,14 @@
                 left: 10px;
                 right: auto;
             }
-            .timeline-content { padding: 16px 18px; }
-            .issue-perspectives { grid-template-columns: 1fr; gap: 14px; }
+            .issue-perspectives { grid-template-columns: 1fr; }
             .character-grid { grid-template-columns: 1fr; }
-
-            /* 인물관계도 모바일 스택 레이아웃 */
-            .relation-board { padding: 22px 15px; }
-            .board-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .main-nodes-container {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                padding: 15px 12px;
-            }
-            .link-line {
-                width: 2px;
-                height: 100%;
-                top: 0;
-                left: 50%;
-                background: linear-gradient(180deg, rgba(197, 160, 89, 0.2), var(--accent-gold), rgba(197, 160, 89, 0.2));
-            }
-            .link-connector { height: 35px; width: 100%; }
-            .sub-network-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 480px) {
-            .logo-title { font-size: 0.82rem; }
-            .logo-sub { font-size: 0.65rem; }
-            .nav-tabs { gap: 10px; }
-            .nav-tabs a { font-size: 0.82rem; }
-            .hero-title { font-size: 1.55rem; }
-            .hero-meta { font-size: 0.88rem; flex-direction: column; gap: 6px; }
-            .issue-card { padding: 20px 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. 오프닝 화면 -->
+    <!-- 오프닝 도어 -->
     <div id="door-container">
         <div class="door-content">
             <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고" class="door-logo">
@@ -861,7 +601,7 @@
         </div>
     </div>
 
-    <!-- 2. 상단 헤더 -->
+    <!-- 헤더 -->
     <header>
         <a href="#" class="nav-logo">
             <img src="https://raw.githubusercontent.com/CLS-2026/p/main/clslogo.webp" alt="CLS 로고">
@@ -879,7 +619,6 @@
         </nav>
     </header>
 
-    <!-- 3. 메인 컨텐츠 -->
     <main>
         <section class="hero-section">
             <span class="hero-badge">형사법연구회 제6회 모의재판</span>
@@ -976,93 +715,12 @@
         <section id="characters" class="section">
             <div class="section-header">
                 <h2 class="section-title">CHARACTERS</h2>
-                <p class="section-subtitle">이번 모의재판을 이끌어가는 등장인물 및 관계도</p>
+                <p class="section-subtitle">사건 관련자 인물관계도 및 상세 프로필</p>
             </div>
 
-            <!-- 새로 디자인된 글래스모피즘 인물관계도 대시보드 -->
-            <div class="relation-board">
-                <div class="board-header">
-                    <div class="board-title">
-                        <span>⚖️</span> 사건 관련자 인물관계도
-                    </div>
-                    <div class="board-legend">
-                        <div class="legend-item">
-                            <span class="legend-dot def"></span> 피고인
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-dot vic"></span> 피해자
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relation-network">
-                    <!-- 메인 친족 관계 스택 1: 방미현 - 사촌지간 - 오태풍 -->
-                    <div class="main-nodes-container">
-                        <div class="node-card def-type">
-                            <span class="node-role-tag">피고인</span>
-                            <div class="node-name">방미현</div>
-                        </div>
-
-                        <div class="link-connector">
-                            <div class="link-line"></div>
-                            <span class="link-badge">사촌지간</span>
-                        </div>
-
-                        <div class="node-card def-type">
-                            <span class="node-role-tag">피고인</span>
-                            <div class="node-name">오태풍</div>
-                        </div>
-                    </div>
-
-                    <!-- 메인 가족/피해 관계 스택 2: 방미현 - 올케/시누이 - 이은채 -->
-                    <div class="main-nodes-container">
-                        <div class="node-card def-type">
-                            <span class="node-role-tag">피고인</span>
-                            <div class="node-name">방미현</div>
-                        </div>
-
-                        <div class="link-connector">
-                            <div class="link-line"></div>
-                            <span class="link-badge">올케 - 시누이 (오빠의 아내)</span>
-                        </div>
-
-                        <div class="node-card vic-type">
-                            <span class="node-role-tag">피해자</span>
-                            <div class="node-name">이은채</div>
-                        </div>
-                    </div>
-
-                    <!-- 보조 서사 및 일면식 네트워크 -->
-                    <div class="sub-network-grid">
-                        <div class="relation-pill-card">
-                            <div class="pill-parties">
-                                <span>이은채</span> ↔ <span>오태풍</span>
-                            </div>
-                            <span class="pill-tag highlight">3~4회 본 일면식 있음</span>
-                        </div>
-
-                        <div class="relation-pill-card">
-                            <div class="pill-parties">
-                                <span>이은채</span> ↔ <span>한별</span>
-                            </div>
-                            <span class="pill-tag highlight">지인 관계</span>
-                        </div>
-
-                        <div class="relation-pill-card">
-                            <div class="pill-parties">
-                                <span>한별</span> ↔ <span>오태풍·방미현</span>
-                            </div>
-                            <span class="pill-tag none">일면식 없음</span>
-                        </div>
-
-                        <div class="relation-pill-card">
-                            <div class="pill-parties">
-                                <span>오태풍</span> ↔ <span>김현오</span>
-                            </div>
-                            <span class="pill-tag none">일면식 없음</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- 럭셔리 다크 테마 이미지 인물관계도 -->
+            <div class="relation-image-wrap">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 480' width='100%' height='100%' style='background:%230e1015; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;'><defs><linearGradient id='gold-grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23e6c88b'/><stop offset='100%' stop-color='%23c5a059'/></linearGradient><filter id='glow'><feGaussianBlur stdDeviation='3' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><rect width='900' height='480' fill='%230e1015' rx='16'/><rect x='10' y='10' width='880' height='460' fill='none' stroke='%23c5a059' stroke-opacity='0.25' stroke-width='1' rx='12'/><text x='450' y='45' fill='%23e6c88b' font-size='20' font-weight='700' text-anchor='middle' letter-spacing='2'>⚖️ 사건 관계인 인물관계도</text><line x1='50' y1='65' x2='850' y2='65' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/><circle cx='680' cy='42' r='5' fill='%23e05252'/><text x='692' y='46' fill='%239ca3af' font-size='12'>피고인</text><circle cx='760' cy='42' r='5' fill='%234d96ff'/><text x='772' y='46' fill='%239ca3af' font-size='12'>피해자</text><line x1='210' y1='145' x2='410' y2='145' stroke='%23c5a059' stroke-width='2' filter='url(%23glow)'/><rect x='270' y='130' width='80' height='30' fill='%231d222e' stroke='%23c5a059' stroke-width='1' rx='15'/><text x='310' y='150' fill='%23e6c88b' font-size='12' font-weight='600' text-anchor='middle'>사촌지간</text><line x1='130' y1='200' x2='130' y2='340' stroke='%23c5a059' stroke-width='2' stroke-dasharray='4'/><rect x='50' y='255' width='160' height='30' fill='%231d222e' stroke='%23c5a059' stroke-width='1' rx='6'/><text x='130' y='275' fill='%23e6c88b' font-size='11' font-weight='600' text-anchor='middle'>올케 - 시누이 (오빠의 아내)</text><line x1='490' y1='145' x2='650' y2='220' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/><rect x='530' y='170' width='110' height='26' fill='%23181a20' rx='4'/><text x='585' y='187' fill='%239ca3af' font-size='11' text-anchor='middle'>3~4회 본 일면식 있음</text><line x1='210' y1='395' x2='650' y2='255' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/><rect x='380' y='305' width='80' height='26' fill='%23181a20' rx='4'/><text x='420' y='322' fill='%239ca3af' font-size='11' text-anchor='middle'>지인 관계</text><rect x='50' y='90' width='160' height='110' fill='%23161920' stroke='%23e05252' stroke-width='2' rx='10'/><rect x='65' y='105' width='50' height='20' fill='rgba(224,82,82,0.2)' rx='4'/><text x='90' y='119' fill='%23e05252' font-size='11' font-weight='700' text-anchor='middle'>피고인</text><text x='130' y='160' fill='%23ffffff' font-size='20' font-weight='700' text-anchor='middle'>방미현</text><rect x='410' y='90' width='160' height='110' fill='%23161920' stroke='%23e05252' stroke-width='2' rx='10'/><rect x='425' y='105' width='50' height='20' fill='rgba(224,82,82,0.2)' rx='4'/><text x='450' y='119' fill='%23e05252' font-size='11' font-weight='700' text-anchor='middle'>피고인</text><text x='490' y='160' fill='%23ffffff' font-size='20' font-weight='700' text-anchor='middle'>오태풍</text><rect x='50' y='340' width='160' height='110' fill='%23161920' stroke='%234d96ff' stroke-width='2' rx='10'/><rect x='65' y='355' width='50' height='20' fill='rgba(77,150,255,0.2)' rx='4'/><text x='90' y='369' fill='%234d96ff' font-size='11' font-weight='700' text-anchor='middle'>피해자</text><text x='130' y='410' fill='%23ffffff' font-size='20' font-weight='700' text-anchor='middle'>이은채</text><rect x='650' y='190' width='160' height='110' fill='%23161920' stroke='%234d96ff' stroke-width='2' rx='10'/><rect x='665' y='205' width='50' height='20' fill='rgba(77,150,255,0.2)' rx='4'/><text x='690' y='219' fill='%234d96ff' font-size='11' font-weight='700' text-anchor='middle'>피해자</text><text x='730' y='260' fill='%23ffffff' font-size='20' font-weight='700' text-anchor='middle'>한 별</text><rect x='650' y='340' width='160' height='110' fill='%23161920' stroke='%234d96ff' stroke-width='1.5' stroke-dasharray='3' rx='10'/><rect x='665' y='355' width='50' height='20' fill='rgba(77,150,255,0.2)' rx='4'/><text x='690' y='369' fill='%234d96ff' font-size='11' font-weight='700' text-anchor='middle'>피해자</text><text x='730' y='410' fill='%23ffffff' font-size='20' font-weight='700' text-anchor='middle'>김현오</text></svg>" alt="형사모의재판 사건 인물관계도" class="relation-img">
             </div>
 
             <!-- 등장인물 카드 목록 -->
@@ -1106,7 +764,7 @@
                 <div class="character-card">
                     <span class="character-role">피해자</span>
                     <div class="character-name">한별</div>
-                    <div class="character-actor">공공인재법무학과</div>
+                    <div class="character-actor">법학과</div>
                     <div class="character-desc">
                         피고인 오태풍과 피해자 이은채가 함바식당에서 시비가 붙은 것을 말리다 오태풍에게 횟칼로 찔림.
                     </div>
