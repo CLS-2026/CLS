@@ -569,7 +569,7 @@
             line-height: 1.5;
         }
 
-        /* 4. PDF 뷰어 커스텀 스타일 */
+        /* 4. PDF 뷰어 커스텀 스타일 & 모바일 터치 스크롤 최적화 */
         .pdf-viewer-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -642,6 +642,9 @@
             width: 100%;
             height: 800px;
             background: #111318;
+            /* 모바일 부드러운 터치 스크롤 최적화 속성 */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .pdf-viewer {
@@ -943,7 +946,7 @@
             </div>
         </section>
 
-        <!-- 4. 증거목록 및 사건기록 원문 (PDF 뷰어 디자인) -->
+        <!-- 4. 증거목록 및 사건기록 원문 (Google Docs Viewer + 모바일 터치 최적화 적용) -->
         <section id="evidence" class="section">
             <div class="section-header">
                 <h2 class="section-title">EVIDENCE DOCUMENT</h2>
@@ -956,12 +959,12 @@
                         <span class="pdf-badge">PDF</span>
                         <span class="pdf-title-text">증거목록 및 사건기록 원문 (evidence.pdf)</span>
                     </div>
-                    <a href="evidence.pdf" target="_blank" class="pdf-action-btn">
+                    <a href="https://raw.githubusercontent.com/CLS-2026/CLS/main/evidence.pdf" target="_blank" class="pdf-action-btn">
                         <span>↗ 새 창에서 크게 보기</span>
                     </a>
                 </div>
                 <div class="pdf-frame-wrapper">
-                    <iframe class="pdf-viewer" src="evidence.pdf"></iframe>
+                    <iframe class="pdf-viewer" src="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/CLS-2026/CLS/main/evidence.pdf&embedded=true"></iframe>
                 </div>
             </div>
         </section>
