@@ -176,7 +176,7 @@
             transform: translateY(-2px);
         }
 
-        /* 2. 네비게이션 헤더 수정 */
+        /* 2. 네비게이션 헤더 (양옆 가로 스크롤 및 잘림 방지 수정) */
         header {
             position: fixed;
             top: 0;
@@ -231,15 +231,15 @@
             white-space: nowrap;
         }
 
-        /* 오른쪽 정렬 및 부드러운 터치 스크롤 최적화 */
+        /* 탭 컨테이너: 가로 스크롤 활성화 및 첫 탭 잘림 방지 */
         .nav-container {
-            flex-shrink: 1;
+            max-width: 60%;
             overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start; /* flex-end 시 발생하던 첫 탭 잘림 현상 해결 */
             scroll-behavior: smooth;
         }
 
@@ -251,8 +251,8 @@
             display: flex;
             align-items: center;
             list-style: none;
-            gap: 24px;
-            padding: 4px 0;
+            gap: 20px;
+            padding: 4px 8px;
             margin: 0;
         }
 
@@ -584,7 +584,7 @@
             line-height: 1.5;
         }
 
-        /* 4. PDF 뷰어 커스텀 스타일 & 모바일 터치 스크롤 최적화 */
+        /* PDF 뷰어 */
         .pdf-viewer-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -677,7 +677,8 @@
 
         @media (max-width: 768px) {
             header { padding: 0 4%; }
-            .nav-tabs { gap: 16px; }
+            .nav-container { max-width: 65%; }
+            .nav-tabs { gap: 14px; }
             .hero-title { font-size: 1.85rem; }
             .hero-section { padding: 60px 16px 45px; }
             .section { padding: 65px 16px; }
@@ -1012,10 +1013,9 @@
             });
         });
 
-        // IntersectionObserver를 이용한 스크롤 연동 및 탭 자동 중앙 정렬
+        // IntersectionObserver를 이용한 스크롤 연동 및 탭 자동 위치 조절
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
-        const navContainer = document.querySelector('.nav-container');
 
         const observerOptions = {
             root: null,
@@ -1033,7 +1033,6 @@
                         link.classList.toggle('active', isMatch);
 
                         if (isMatch) {
-                            // 활성화된 탭이 상단 네비게이션 가로 스크롤 범위 안으로 부드럽게 위치
                             link.scrollIntoView({
                                 behavior: 'smooth',
                                 inline: 'center',
