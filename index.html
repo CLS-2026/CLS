@@ -176,7 +176,7 @@
             transform: translateY(-2px);
         }
 
-        /* 2. 네비게이션 헤더 */
+        /* 2. 네비게이션 헤더 수정 */
         header {
             position: fixed;
             top: 0;
@@ -191,7 +191,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 4%;
-            gap: 15px;
+            gap: 20px;
         }
 
         .nav-logo {
@@ -233,12 +233,14 @@
 
         /* 오른쪽 정렬 및 부드러운 터치 스크롤 최적화 */
         .nav-container {
+            flex-shrink: 1;
             overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            margin-left: auto;
-            padding-right: 5px;
+            display: flex;
+            justify-content: flex-end;
+            scroll-behavior: smooth;
         }
 
         .nav-container::-webkit-scrollbar {
@@ -247,10 +249,16 @@
 
         .nav-tabs {
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
             list-style: none;
-            gap: 20px;
+            gap: 24px;
             padding: 4px 0;
+            margin: 0;
+        }
+
+        .nav-tabs li {
+            display: flex;
+            align-items: center;
         }
 
         .nav-tabs a {
@@ -260,12 +268,15 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
-            padding: 8px 2px;
+            padding: 8px 4px;
             white-space: nowrap;
             display: inline-block;
         }
 
-        .nav-tabs a:hover, .nav-tabs a.active { color: var(--accent-gold); }
+        .nav-tabs a:hover, .nav-tabs a.active { 
+            color: var(--accent-gold-light); 
+            font-weight: 600;
+        }
 
         .nav-tabs a::after {
             content: '';
@@ -324,6 +335,7 @@
             margin: 0 auto;
             padding: 80px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            scroll-margin-top: var(--header-height);
         }
 
         .section-header {
@@ -665,6 +677,7 @@
 
         @media (max-width: 768px) {
             header { padding: 0 4%; }
+            .nav-tabs { gap: 16px; }
             .hero-title { font-size: 1.85rem; }
             .hero-section { padding: 60px 16px 45px; }
             .section { padding: 65px 16px; }
@@ -992,43 +1005,47 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    const headerHeight = 70;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-                    window.scrollTo({
-                        top: offsetPosition,
+                    targetElement.scrollIntoView({
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // 스크롤 시 active 탭 변경
+        // IntersectionObserver를 이용한 스크롤 연동 및 탭 자동 중앙 정렬
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
+        const navContainer = document.querySelector('.nav-container');
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const scrollY = window.pageYOffset;
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
 
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 120;
-                const sectionId = section.getAttribute('id');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        const isMatch = link.getAttribute('href') === `#${activeId}`;
+                        link.classList.toggle('active', isMatch);
 
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    current = sectionId;
+                        if (isMatch) {
+                            // 활성화된 탭이 상단 네비게이션 가로 스크롤 범위 안으로 부드럽게 위치
+                            link.scrollIntoView({
+                                behavior: 'smooth',
+                                inline: 'center',
+                                block: 'nearest'
+                            });
+                        }
+                    });
                 }
             });
+        }, observerOptions);
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
